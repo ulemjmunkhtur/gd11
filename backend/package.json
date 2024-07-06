@@ -1,0 +1,15 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "backend for our website",
+  "main": "App.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "gd11"
+  },
+  "author": "ulemj & saruul",
+  "license": "ISC"
+}
