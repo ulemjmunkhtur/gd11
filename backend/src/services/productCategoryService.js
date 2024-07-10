@@ -21,6 +21,19 @@ async function getProductCategoryById(categoryId) {
     }
 }
 
+
+// Retrieve all product categories
+async function getAllProductCategories() {
+    try {
+        const categories = await ProductCategory.findAll();
+        return categories.map(category => category.toJSON());
+    } catch (error) {
+        console.error('Error retrieving all product categories:', error);
+        return [];
+    }
+}
+
+
 // Update product category
 async function updateProductCategory(categoryId, updates) {
     try {
@@ -53,4 +66,4 @@ async function deleteProductCategory(categoryId) {
     }
 }
 
-module.exports = { createProductCategory, getProductCategoryById, updateProductCategory, deleteProductCategory };
+module.exports = { createProductCategory, getProductCategoryById, updateProductCategory, deleteProductCategory, getAllProductCategories };

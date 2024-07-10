@@ -34,6 +34,18 @@ async function createProduct(productDetails) {
     }
 }
 
+
+// Retrieve all products
+async function getAllProducts() {
+    try {
+        const products = await Product.findAll();
+        return products.map(product => product.toJSON());
+    } catch (error) {
+        console.error('Error retrieving all products:', error);
+        return [];
+    }
+}
+
 // Read product by ID
 async function getProductById(productId) {
     try {
@@ -114,5 +126,6 @@ module.exports = {
     getProductById,
     getProductsByName,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    getAllProducts
 };

@@ -21,6 +21,16 @@ async function getUserById(userId) {
     }
 }
 
+async function getAllUsers() {
+    try {
+        const users = await User.findAll();
+        return users.map(user => user.toJSON());
+    } catch (error) {
+        console.error('Error retrieving all users:', error);
+        return [];
+    }
+}
+
 // Update user
 async function updateUser(userId, updates) {
     try {
@@ -53,4 +63,4 @@ async function deleteUser(userId) {
     }
 }
 
-module.exports = { createUser, getUserById, updateUser, deleteUser };
+module.exports = { createUser, getUserById, updateUser, deleteUser, getAllUsers };
