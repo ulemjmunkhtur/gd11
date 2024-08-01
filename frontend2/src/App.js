@@ -1,7 +1,8 @@
 import React from 'react';
 import Navbar from './components/Navbar'
 import HeroSection from './components/Hero'
-import ProductPage from './components/ProductPage'
+import ProductSearch from './components/ProductSearch'
+import ProductPage from './components/ProductSearch'
 import Footer from './components/Footer'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -9,7 +10,7 @@ const App = () => {
   return (
     <div>
       <Navbar/>
-     <ProductPage />
+     <ProductSearch/>
      <Footer/>
 
     </div>
