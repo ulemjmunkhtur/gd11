@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import styled, { createGlobalStyle } from 'styled-components';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import logo from '../images/gd11-logo.png'; // Adjust the path based on your project structure
 
 const GlobalStyle = createGlobalStyle`
@@ -25,7 +26,7 @@ const Logo = styled.img`
   height: 32px;
 `;
 
-const NavLink = styled.a`
+const NavLink = styled(Link)`  // Use Link component
   color: #333;
   font-weight: 500;
   margin: 0 16px;
@@ -72,7 +73,7 @@ const FlyoutLink = ({ children, href, FlyoutContent }) => {
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      <NavLink href={href}>{children}</NavLink>
+      <NavLink to={href}>{children}</NavLink>
       <AnimatePresence>
         {showFlyout && (
           <FlyoutContentContainer
@@ -93,11 +94,11 @@ const ProductContent = () => {
   return (
     <div className="w-64 p-4 bg-white shadow-xl rounded-md">
       <div className="flex flex-col space-y-4">
-        <NavLink href="#">ALL</NavLink>
-        <NavLink href="#">PREMIUM<sup>RX</sup></NavLink>
-        <NavLink href="#">ADVANCED LAB ENERGY</NavLink>
-        <NavLink href="#">CELL FACTORY</NavLink>
-        <NavLink href="#">ESTHÉ Rx</NavLink>
+        <NavLink to="#">ALL</NavLink>
+        <NavLink to="/productsearch">PREMIUM<sup>RX</sup></NavLink>
+        <NavLink to="#">ADVANCED LAB ENERGY</NavLink>
+        <NavLink to="#">CELL FACTORY</NavLink>
+        <NavLink to="#">ESTHÉ Rx</NavLink>
       </div>
     </div>
   );
@@ -109,15 +110,19 @@ const Navbar = () => {
       <GlobalStyle />
       <NavbarContainer>
         <div className="flex space-x-8 items-center">
-          <a href="#">
+          <Link to="/">
             <Logo src={logo} alt="GD11 Logo" />
-          </a>
-          <FlyoutLink href="#" FlyoutContent={ProductContent}>Products</FlyoutLink>
-          <NavLink href="#">About GD11</NavLink>
+          </Link>
+          <FlyoutLink href="/productsearch" FlyoutContent={ProductContent}>Products</FlyoutLink>
+          <NavLink to="/about">About GD11</NavLink>
         </div>
         <IconContainer>
-          <FaShoppingCart />
-          <FaUser />
+          <NavLink to="/cart">
+            <FaShoppingCart />
+          </NavLink>
+          <NavLink to="/signup">
+            <FaUser />
+          </NavLink>
         </IconContainer>
       </NavbarContainer>
     </>
