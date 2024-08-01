@@ -1,6 +1,5 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
-const User = require('../models/User'); // Assuming User model is defined in users.js
 
 const Address = sequelize.define('Address', {
   AddressID: {
@@ -11,20 +10,16 @@ const Address = sequelize.define('Address', {
   UserID: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    references: {
-      model: User, // This is the model reference
-      key: 'UserID', // The column that it references in User model
-    }
   },
   AddressLine1: {
     type: DataTypes.STRING(255),
     allowNull: false,
   },
-  District: {
+  district: {
     type: DataTypes.STRING(100),
-    allowNull: true, // Allowing null based on typical use-case; adjust as necessary.
+    allowNull: true,
   },
-  City: {
+  city: {
     type: DataTypes.STRING(100),
     allowNull: false,
   },
@@ -33,7 +28,7 @@ const Address = sequelize.define('Address', {
     allowNull: false,
   },
 }, {
-  timestamps: false, // No automatic timestamp fields
+  timestamps: false,
   tableName: 'Address'
 });
 

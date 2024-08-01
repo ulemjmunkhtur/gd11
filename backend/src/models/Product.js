@@ -20,23 +20,23 @@ const Product = sequelize.define('Product', {
     type: DataTypes.STRING(255),
     allowNull: false,
   },
-  Volume: {
+  volume: {
     type: DataTypes.STRING(255),
     allowNull: true,
   },
-  Function: {
+  function: {
     type: DataTypes.STRING(255),
     allowNull: true,
   },
-  SkinBenefits: {
+  skinbenefits: {
     type: DataTypes.STRING(255),
     allowNull: true,
   },
-  Characteristics: {
+  characteristics: {
     type: DataTypes.TEXT,
     allowNull: true,
   },
-  HowToUse: {
+  howtouse: {
     type: DataTypes.TEXT,
     allowNull: true,
   },

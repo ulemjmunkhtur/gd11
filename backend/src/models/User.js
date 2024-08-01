@@ -12,7 +12,7 @@ const User = sequelize.define('User', {
     unique: true,
     allowNull: false,
     validate: {
-      isEmail: true, // Validates the email format
+      isEmail: true,
     }
   },
   Password: {
@@ -21,23 +21,23 @@ const User = sequelize.define('User', {
   },
   FirstName: {
     type: DataTypes.STRING(50),
-    allowNull: true, 
+    allowNull: true,
   },
   LastName: {
     type: DataTypes.STRING(50),
-    allowNull: true, // Allowing null based on typical use-case; adjust as necessary.
+    allowNull: true,
   },
   Phone: {
     type: DataTypes.STRING(20),
-    allowNull: false, // Allowing null based on typical use-case; adjust as necessary.
+    allowNull: false,
   },
   CreatedAt: {
     type: DataTypes.DATE,
     allowNull: false,
-    defaultValue: DataTypes.NOW, // Default value to automatically set the date and time of creation
+    defaultValue: DataTypes.NOW,
   },
 }, {
-  timestamps: false, // Explicitly telling Sequelize not to handle timestamps
+  timestamps: false,
   tableName: 'User'
 });
 

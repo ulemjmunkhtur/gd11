@@ -1,4 +1,6 @@
 const User = require('../models/User'); // Assuming the User model path
+require('../models/associations');
+
 
 // Create a new user
 async function createUser(userData) {
@@ -24,6 +26,7 @@ async function getUserById(userId) {
 async function getAllUsers() {
     try {
         const users = await User.findAll();
+        console.log(users);
         return users.map(user => user.toJSON());
     } catch (error) {
         console.error('Error retrieving all users:', error);

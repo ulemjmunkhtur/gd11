@@ -1,7 +1,8 @@
 const Address = require('../models/Address'); // Assuming the Address model path
+require('../models/associations');
 
 // Create a new address
-async function createAddress(addressData) {
+exports.createAddress = async(addressData) => {
     try {
         const newAddress = await Address.create(addressData);
         console.log('Address created successfully:', newAddress.toJSON());
@@ -12,7 +13,7 @@ async function createAddress(addressData) {
 }
 
 // Retrieve address by ID
-async function getAddressById(addressId) {
+exports.getAddressById = async(addressId) => {
     try {
         const address = await Address.findByPk(addressId);
         return address ? address.toJSON() : null;
@@ -22,7 +23,7 @@ async function getAddressById(addressId) {
 }
 
 // Update address
-async function updateAddress(addressId, updates) {
+exports.updateAddress = async(addressId, updates)=> {
     try {
         const address = await Address.findByPk(addressId);
         if (address) {
@@ -38,7 +39,7 @@ async function updateAddress(addressId, updates) {
 }
 
 // Delete address
-async function deleteAddress(addressId) {
+exports.deleteAddress = async(addressId)=> {
     try {
         const result = await Address.destroy({
             where: { AddressID: addressId }
@@ -52,5 +53,12 @@ async function deleteAddress(addressId) {
         console.error('Error deleting address:', error);
     }
 }
+exports.getAllAddresses = async () => {
+    try {
+      const addresses = await Address.findAll();
+      return addresses;
+    } catch (error) {
+      throw new Error('Failed to retrieve addresses');
+    }
+  };
 
-module.exports = { createAddress, getAddressById, updateAddress, deleteAddress };

@@ -4,9 +4,16 @@ exports.createAddress = async (req, res) => {
   try {
     const addressData = req.body;
     const address = await AddressService.createAddress(addressData);
+    
+    // Check if address is actually created
+    if (!address) {
+      throw new Error('Address creation failed');
+    }
+    
     res.status(201).json(address);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error('Error creating address:', error);
+    res.status(500).json({ error: error.message || 'Internal server error' });
   }
 };
 

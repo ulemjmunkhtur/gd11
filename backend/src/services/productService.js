@@ -18,13 +18,13 @@ async function createProduct(productDetails) {
 
         const newProduct = await Product.create({
             CategoryID: category.CategoryID,
-            Name: productDetails.productName,
-            Volume: productDetails.volume,
-            Function: productDetails.func,
-            SkinBenefits: productDetails.skinBenefits,
-            Characteristics: productDetails.characteristics,
-            HowToUse: productDetails.howToUse,
-            Price: productDetails.price
+            Name: productDetails.Name,
+            volume: productDetails.volume,
+            function: productDetails.function,
+            skinbenefits: productDetails.skinbenefits,
+            characteristics: productDetails.characteristics,
+            howtouse: productDetails.howtouse,
+            Price: productDetails.Price
         });
 
         console.log('Product created successfully:', newProduct.toJSON());
