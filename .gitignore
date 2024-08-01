@@ -1,2 +1,27 @@
+
+# dependencies
+/node_modules
+backend/node_modules/
+frontend2/node_modules/
+/.pnp
+.pnp.js
+backend/ec2-key-pair.pem
 backend/.env
 backend/node_modules/
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
