@@ -49,18 +49,25 @@ async function getAllProducts() {
 // Read product by ID
 async function getProductById(productId) {
     try {
-        const product = await Product.findByPk(productId);
-        if (product) {
-            console.log('Product found:', product.toJSON());
-            return product;
-        } else {
-            console.log('Product not found!');
-            return null;
-        }
+      // Ensure productId is a number
+      const id = parseInt(productId, 10);
+      
+      if (isNaN(id)) {
+        throw new Error('Invalid ProductID: must be a number');
+      }
+  
+      const product = await Product.findByPk(id);
+      
+      if (!product) {
+        throw new Error('Product not found');
+      }
+  
+      return product;
     } catch (error) {
-        console.error('Error retrieving product:', error);
+      console.error('Error retrieving product:', error);
+      throw error;
     }
-}
+  };
 // Retrieve products by name
 async function getProductsByName(productName) {
     try {
@@ -120,12 +127,50 @@ async function deleteProduct(productId) {
     }
 }
 
+async function getProductsByCategoryName(categoryName) {
+    try {
+      console.log(`Fetching products for category: ${categoryName}`);
+  
+      if (categoryName === '') {
+        // Handle the 'ALL' case by fetching all products
+        const products = await Product.findAll();
+        console.log(`Found ${products.length} products across all categories`);
+        return products;
+      }
+  
+      const category = await ProductCategory.findOne({ 
+        where: { Name: categoryName },
+        attributes: ['CategoryID', 'Name'] // Only select the fields you need
+      });
+  
+      if (!category) {
+        console.log(`Category not found: ${categoryName}`);
+        return []; // Return an empty array instead of throwing an error
+      }
+  
+      console.log(`Found category:`, JSON.stringify(category, null, 2));
+  
+      const products = await Product.findAll({ 
+        where: { CategoryID: category.CategoryID },
+        attributes: ['ProductID', 'Name', 'CategoryID'] // Adjust as needed
+      });
+  
+      console.log(`Found ${products.length} products for category ${categoryName}`);
+      return products;
+  
+    } catch (error) {
+      console.error('Error in getProductsByCategoryName:', error);
+      throw error; // Rethrow the error with more context
+    }
+  };
+
 // Export functions
 module.exports = {
     createProduct,
-    getProductById,
     getProductsByName,
     updateProduct,
     deleteProduct,
-    getAllProducts
+    getAllProducts,
+    getProductById,
+    getProductsByCategoryName
 };

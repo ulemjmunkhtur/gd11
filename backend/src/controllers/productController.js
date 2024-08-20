@@ -1,4 +1,15 @@
-const ProductService = require('../services/ProductService');
+const ProductService = require('../services/productService');
+
+
+exports.getProductsByCategoryName = async (req, res) => {
+  try {
+    const { categoryName } = req.params;
+    const products = await ProductService.getProductsByCategoryName(categoryName);
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch products by category name' });
+  }
+};
 
 exports.createProduct = async (req, res) => {
   try {
@@ -20,13 +31,15 @@ exports.getAllProducts = async (req, res) => {
   }
 };
 
+
 exports.getProductById = async (req, res) => {
   try {
-    const productId = req.params.id;
-    const product = await ProductService.getProductById(productId);
+    const { id } = req.params; // Make sure you're using 'id' and not 'category'
+    const product = await ProductService.getProductById(id);
     res.json(product);
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    console.error('Error in getProductById controller:', error);
+    res.status(400).json({ error: error.message });
   }
 };
 
